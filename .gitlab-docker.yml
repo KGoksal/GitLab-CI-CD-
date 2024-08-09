@@ -25,3 +25,7 @@ docker-build:
           sudo docker push "$CI_REGISTRY_IMAGE:latest"
           # Push the 'latest' tagged Docker image to the Docker registry
       fi
+rules:
+    - if: $CI_COMMIT_BRANCH  # Run this job if there are changes in the branch
+    - changes:
+        - Dockerfile  # Run this job if Dockerfile has changed
