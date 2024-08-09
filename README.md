@@ -2,6 +2,7 @@
 
 This repository includes two examples of GitLab CI/CD configuration files (``.gitlab-ci.yml``) for different scenarios. Below is an overview of each configuration:
 
+
 ## Example 1: Build, Test, and Deploy Pipeline
 ```
 # .gitlab-ci.yml
