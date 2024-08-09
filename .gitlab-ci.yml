@@ -14,3 +14,14 @@ test_job:
   stage: test
   script:
     - echo "Running tests for Project Alpha"
+
+# Job to deploy to production
+deploy_production:
+  stage: deploy
+  script:
+    - echo "Deploying to production..."
+  environment:
+    name: production
+    url: https://example.com
+  only:
+    - main  # Deploy only on changes to the main branch
