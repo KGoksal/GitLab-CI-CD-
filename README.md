@@ -34,7 +34,7 @@ deploy_production:
   only:
     - master  # Deploy only on changes to the master branch
 ```
-
+ 
 ### Explanation:
 - **Stages Definition**: Defines three stages: `build`, `test`, and `deploy`.
 - **Build Job (`build_job`)**: Executes a script to build the project.
