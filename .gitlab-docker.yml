@@ -1,0 +1,27 @@
+# Define stages of the pipeline
+stages:
+  - build
+
+# Job definition for building and pushing Docker image
+docker-build:
+  stage: build  # Stage where this job runs
+  image: docker:19.03.12  # Docker image used for this job (specific version)
+  tags:
+    - test-centos  # Tags specifying where this job can run (runners with 'test-centos' tag)
+  variables:
+    DOCKER_IMAGE_NAME: "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"  # Variable defining Docker image name (registry/image:tag)
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | sudo docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    # Before running the script, log in to Docker registry using credentials
+  script:
+    - sudo docker build --pull -t "$DOCKER_IMAGE_NAME" -f src/Test.Api/Dockerfile .
+    # Build Docker image from Dockerfile in src/Test.Api directory
+    - sudo docker push "$DOCKER_IMAGE_NAME"
+    # Push the built Docker image to the Docker registry
+    - |
+      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+          sudo docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
+          # Tag the Docker image with 'latest' if the branch is the default branch
+          sudo docker push "$CI_REGISTRY_IMAGE:latest"
+          # Push the 'latest' tagged Docker image to the Docker registry
+      fi
