@@ -1,0 +1,25 @@
+# Define stages of the pipeline
+stages:
+  - build
+  - test
+
+# Define variables
+variables:
+  DOCKER_DRIVER: overlay2
+
+# Job to build the Docker image
+build_job:
+  stage: build
+  image: docker:stable  # Use Docker in a Docker image
+  services:
+    - docker:dind  # Enable Docker-in-Docker
+  script:
+    - docker build -t my-app .  # Build Docker image named my-app
+
+# Job to run tests with Node.js
+test_job:
+  stage: test
+  image: node:14  # Use Node.js 14 image
+  script:
+    - npm install  # Install dependencies
+    - npm test  # Run tests
