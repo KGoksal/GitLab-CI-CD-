@@ -1,0 +1,16 @@
+# Define stages of the pipeline
+stages:
+  - build
+  - test
+
+# Job to build the project
+build_job:
+  stage: build
+  script:
+    - echo "Building the project Alpha"
+
+# Job to run tests
+test_job:
+  stage: test
+  script:
+    - echo "Running tests for Project Alpha"
