@@ -72,6 +72,7 @@ test_job:
     - npm test  # Run tests
 ```
 
+
 ### Explanation:
 - **Stages Definition**: Defines two stages: `build` and `test`.
 - **Variables Definition**: Sets a Docker driver variable (`DOCKER_DRIVER`) to `overlay2`.
