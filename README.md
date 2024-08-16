@@ -70,7 +70,7 @@ test_job:
   script:
     - npm install  # Install dependencies
     - npm test  # Run tests
-``` 
+```
 
 ### Explanation:
 - **Stages Definition**: Defines two stages: `build` and `test`.
