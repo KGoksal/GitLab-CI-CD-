@@ -6,7 +6,7 @@ This repository includes two examples of GitLab CI/CD configuration files (``.gi
 ```
 # .gitlab-ci.yml
 # Define stages of the pipeline
-stages:
+stages: 
   - build
   - test
   - deploy
